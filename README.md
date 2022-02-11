@@ -19,9 +19,16 @@
 - B-TREE & B*-TREE
 
 **운영체제**
-
-- PROCESS & THREAD 차이
-  Multi Process와 Multi Thread란 무엇인가?
-- Heap과 Stack의 차이
-- 레이디스컨디션 & 데드락
-  동시성 이슈관련 회피법 공부
+Process vs Thread 의차이
+언제 무엇을 쓰는 것이 좋을까?
+Multi Process vs Multi Thread
+Heap 영역 Stack 영역 차이
+stack은 정적인 처리, 스택 방식으로 마지막 요청부터 순차적으로 처리
+heap은 동적인 처리
+Lace Condition 경합 상태
+Lace Condition 또는 데드락을 회피 할수 있는 방법
+동시성이슈
+하나의 어플리케이션내에서 (스레드끼리 동시성 이슈) 처리방법
+서로다른 어플리케이션에서 (프로세스 끼리 동시성 이슈) 처리 방법
+같은 DB를 바라볼 때 일어나는 이슈
+slow query 인덱스로 인한 인프런 장애 사례
