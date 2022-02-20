@@ -66,4 +66,85 @@ PC 값은 쓰레드가 명령어의 어디까지 수행하였는지를 나타나
 
 멀티 프로세스의 경우 우리가 컴퓨터에 여러개의 프로그램을 띄워놓는 것과 같다. 여러개의 프로그램이 동시에 실행되고 있는 것 처럼 보이지만 각 프로세스에서 사용자가 사용한 기능만 실행되고 대기 상태로 돌아가게된다.  
 
-여기서 프로세스를 여러개 띄워놓고 하나의 프로세스에서 다른 프로세스로 전환하게 되면 context switching이라는 작업이 실행되게 된다. 
+여기서 프로세스를 여러개 띄워놓고 하나의 프로세스에서 다른 프로세스로 전환하게 되면 context switching이라는 작업이 실행되게 된다.  
+
+
+## Java 메모리구조 
+이제부터 JVM메모리 구조를 공부해보자.  
+
+우선 JVM의 메모리구조를 공부해야하는 이유에 대해 먼저 생각 해보면 컴퓨터는 메모리에 존재하는 프로그램(소스코드,데이터)을 프로세스에 올리고 사용자가 사용할 수 있게된다. 결국 메모리의 데이터를 어떻게 효율적이고 정확하게 읽어올 수 있느냐는 성능에 영향을 주게된다.  
+
+이제 JVM 메모리 구조를 보기 전에 JVM의 구조를 살펴보자.  
+
+JVM은 크게 4가지 영역으로 나누어진다. Garbage Collector, Class Loader, Runtime Data Area, Execution Engine 이다. 하나씩 간단하게 집고 넘어가자  
+
+**① Garbage Collector**
+개발자가 작성한 객체 생성코드를 읽을 때마다 Runtime Data Area 내부의 힙영역에 해당 객체의 데이터가 적재된다. 시간에 따라 일회성으로 사용되고 더이상 사용하지 않는 객체들이 생겨나게 된다. 과거에는 객체들의 메모리 공간을 지정해주고 해제해주는 작업까지 개발자가 직접 코드로 작성해줘야했다. 하지만 JAVA에서는 이러한 수고를 덜 수 있도록 Garbage Collection을 제공한다. Heap영역에 적재되어 있는 객체 중 사용하지 않는 (Unreachable)한 객체들을 자동으로 삭제시켜준다. 시기에 맞게 작동함으로 개발자가 직접 손대지 않는 것이 좋다. 괜히 작동 시켰다가 비용(시간)이 발생할 수 있다.  
+
+**② Class Loader**
+개발자가 작성한 .java 파일은 javac(자바 컴파일러)에 의해 .class(바이트 코드)로 컴파일 됩니다. 그리고 이 컴파일된 파일을 개발자가 실행 시키면 ClassLoader가 .class 파일을 RuntimeArea Method Area에 적재한다.  
+
+**③ Execution Engine**
+Runtime Data Area에 적재된 .class 파일들을 하나의 명령단위로 읽어내린 뒤 컴퓨터가 실행할 수 있는 기계어로 번역하여 명령을 작동시킨다. JVM은 성능의 향상을 위해 작동의 방식을 Interpretor(통역사) 방식과 JIT(번역본) 방식 두가지를 사용한다.(기존에는 한줄씩 읽어내리는 Interpretor방식만 사용하여 시간이 오래걸렸다.)  
+
+**④ Runtime Data Area**
+JVM메모리 영역으로 OS로부터 별도로 메모리 공간을 할당받고 JAVA 어플리케이션을 실행할 때 사용된다. Method Area, Heap Area, Stack Area, PC register, Native Method Stack 총 5가지로 구분된다.  
+
+### Runtime Data Area  
+
+![image](https://user-images.githubusercontent.com/78134917/154840710-e29e0fb6-4411-4f17-b290-e3626df0bfb5.png)  
+  
+1. Method Area
+Class Loading을 통해 바이트코드가 올라오는 영역, java 어플리케이션이 실행되면 클래스 별로 클래스에서 필요한 패키지 클래스, 런타임 상수풀, 인터페이스, 상수, static변수, final 변수, 클래스 멤버 변수 등 필드데이터, 생성자를 포함한 모든 메서드 정보 등을 로드된다. 이 메모리영역의 데이터들을 지속적으로 상주하고 있다.(클래스파일을 실행 시키기 위한 정보들의 총 집합)   
+
+2. Heap Area  
+메서드 내부에서 생성되는 객체들을 위한 영역,  new를 통해 생성된 객체, 배열, immutal 객체 등의 값이 저장된다. 이 영역은 모든 쓰레가 공유하기때문에 Heap Area에 존재하는 객체들은 모든 쓰레드에서 참조하여 사용이 가능하다.  
+
+3. Stack Area  
+Stack Area은 스레드마다 하나씩 존재하며 쓰레드가 시작될 때 할당된다. 내부에는 매소드에서 직접 사용할 지역 변수, 파라미터, 리턴 값, 참조 변수일 경우 주소 값 들이 저장된다. 만약 프로그램에서 매소드가 호출되면 매소드와 매소드 정보는 아래서 위로 Stack에 쌓이면서(PUSH) 내부 과정을 실행한다. 매소드 호출이 종료되면 해당 매소드는 Stack Area에서 제거(POP) 한다.  
+
+4. PC register  
+현재 실행되고 있는 메서드의 위치 정보를 해당 명령어를 저장해두는 공간. 멀티 쓰레딩 방식에서 대기 후 재실행이 가능한 이유이기도 하다.  
+
+6. Native Area  
+java이외의 다른 언어의 메서드가 저장되는 공간  
+
+### Heapd의 메모리 구조(효율적인 GC의 관리를 위한)
+다른 메모리 영역들과 드리게 Heap의 영역은 조금 다르다. Heap은 동적으로 생성되는 객체를 다루기 때문에 생성되는 객체의 크기를 가늠하기가 어렵다. 따라서 지속적인 관리가 필요한데 이를 GC가 자동으로 관리해준다. 이렇게 일종의 메모리 관리 프로그램인 GC를 효율적으로 관리하기 위해 Heap영역을 크게는 2가지 카테고리와 세세하게는 5가지 영역으로 나누었다.Young Generation, Old Generation 그리고 Eden과 두개의 Survior(1,2), Old, Permenent(생성된 객체의 주소가 저장되는 영역이다). 나눈 이유에 대해선 GC의 작동 방식을 이해하면 납득 될 것이다.   
+
+![image](https://user-images.githubusercontent.com/78134917/154841693-d48f5efa-75e1-4d8c-aee9-55167f6f969e.png)  
+
+
+새로운 객체가 생성되면 객체의 데이터가 Heap의 Eden영역에 할당(Allocation)된다. Eden 영역이 가득 차면 MinorGC가 발생하게되고 더 이상 사용되지 않는 객체는 메모리를 해제하고 지속적으로 사용중인 객체는 Survivor1영역으로 옮겨지게 된다. 다시 Eden영역이 가득차서 MinorGC가 발생하면 Eden의 생존 객체가 Survivor2영역에 옮겨지게되고 데이터가 존재하는 Survivor1영역의 생존한 객체들도 Survivor2로 이동하게된다(Eden이 가득찰 때마다 survivor1과2를 번갈아가면서 이동한다). 이 작업이 반복되다가 오래살아 남은 객체는 Old 영역으로 promotion되게 되는데 이의 기준을 age로 잡게된다. Eden에서 survivor로 옮겨가게되면 age가 올라가게되고 survivor1에서 survivor로 이동하면 다시 age가 올라가게된다. age의 수준을 정해 놓으면 해당 age에 도달했을 때 promotion이 이루어지게 된다.  
+
+promotion의 지속적인 발생으로 old영역의 메모리 공간이 가득차게되면 MajorGC(Full GC)가 발생하게된다. 이 MajorGC의 경우는 시간이 오래 걸린다.  
+
+Garbage Collection(Full GC의 종류이다.) 같은 경우 여러가지 종류가 존재한다.   
+
+1. Parallel Collector (Throughput Collector)  일
+mark-sweep-compact 알고리즘을 사용한다  
+Full GC와 Minor GC의 작동을 병렬식으로 처리한다.
+> mark : Old 영역에 살아 있는 객체를 식별하여 표시해 놓는다  
+> sweep : heap의 앞부분 부터 확인하여 살아있는 객체만 남긴다  
+> compact : 각 객체들이 연속되게 쌓이도록 가장 앞 부분부터 채워서 객제가 존재하는 부분과 없는 부분으로 나눈다  
+Parallel GC는 GC를 처리하는 쓰레드가 여러 개다.  
+메모리가 충분하고 코어의 개수가 많을 때 적합한 GC 방식이다. 
+
+2. CMS GC(Concurrent Mark-Sweep Collector)  
+STW의 시간이 짧지만 GPU의 리소스를 많이 사용한다. Compactation이 없어서 메모리의 파편화 때문에 다른 방식보다 STW의 시간이 오래걸린다.  
+Young 영역은 병렬 처리, CMS 콜렉터 방식은 2개 이상의 프로세서를 사용하는 서버에 적당하다. 가장 적당한 대상으로는 웹서버가 있다.
+![image](https://user-images.githubusercontent.com/78134917/154844385-980058ae-22e5-49e4-8329-0ef334f7d76d.png)  
+> Initial Mark 단계 : class loader에서 가장 가까운 객체 중 살아 있는 객체만 찾는다 (mark)  
+> Concurrent Mark 단계 : 올스탑(stop-the-world)없이 살아있다고 확인한 객체에서 참조하고 있는 객체를 확인한다  
+> Remark 단계 : Concurrent Mark 단계에서 새로 추가되거나 참조가 끊긴 객체를 확인한다  
+> Concurrent Sweep 단계 : 올스탑(stop-the-world)없이 참조 되지 않는 객체를 정리한다  
+
+
+3. G1 GC(Garbage First)  -- GC 중 가장 빠르다
+CPU리소스 및 메모리 파편화의 단점을 해결하기 위해 만들어진 방식이며 Promotion의 단계가 사라진 GC이다.    
+바둑판 형식의 메모리 구조를 이용하며 바둑판의 구역하나가 다 차면 다른영역에 데이터가 적재된다.
+![image](https://user-images.githubusercontent.com/78134917/154844727-42c431b8-9ef0-4e5f-a8b6-36387d4ac20f.png)  
+
+
+
+
