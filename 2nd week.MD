@@ -6,8 +6,8 @@
 1. [Process & Thread](##-1.Process-와-Thread-개념)
 2. [Multi Process & Multi Thread](##-Multi-Process-&-Multi-Thread)
 3. Java 메모리구조
-4. Java Collection Framwork
-5. Garbage Collector  
+4. Garbage Collector  
+5. Java Collection Framwork
 </br> 
 
 ## 1. Process 와 Thread 개념  
@@ -61,7 +61,7 @@ PC 값은 쓰레드가 명령어의 어디까지 수행하였는지를 나타나
 우선, 프로세스가 생성되면서 메인 쓰레드가 하나 생성되고 나머지 쓰레드는 그 이후에 생겨난다. 추가로 쓰레드를 생성하지 않으면 메인 쓰레드에서 모든 작업들이 실행된다.  
 
 
-## Multi Process & Multi Thread
+## 2. Multi Process & Multi Thread
 멀티 쓰레드의 기본적인 개념 같은 경우에는 위의 글과 같이 하나의 프로세스 안에 여러개의 쓰레드가 존재하는 것을 의미합니다. 멀티 쓰레드는 멀티 프로세스의 비효율적인 면을 개선해 줌으로 우선 멀티 프로세스의 개념과 단점을 먼저 살펴보겟습니다.  
 
 멀티 프로세스의 경우 우리가 컴퓨터에 여러개의 프로그램을 띄워놓는 것과 같다. 여러개의 프로그램이 동시에 실행되고 있는 것 처럼 보이지만 각 프로세스에서 사용자가 사용한 기능만 실행되고 대기 상태로 돌아가게된다.  
@@ -69,7 +69,7 @@ PC 값은 쓰레드가 명령어의 어디까지 수행하였는지를 나타나
 여기서 프로세스를 여러개 띄워놓고 하나의 프로세스에서 다른 프로세스로 전환하게 되면 context switching이라는 작업이 실행되게 된다.  
 
 
-## Java 메모리구조 
+## 3. Java 메모리구조 
 이제부터 JVM메모리 구조를 공부해보자.  
 
 우선 JVM의 메모리구조를 공부해야하는 이유에 대해 먼저 생각 해보면 컴퓨터는 메모리에 존재하는 프로그램(소스코드,데이터)을 프로세스에 올리고 사용자가 사용할 수 있게된다. 결국 메모리의 데이터를 어떻게 효율적이고 정확하게 읽어올 수 있느냐는 성능에 영향을 주게된다.  
@@ -109,7 +109,7 @@ Stack Area은 스레드마다 하나씩 존재하며 쓰레드가 시작될 때 
 6. Native Area  
 java이외의 다른 언어의 메서드가 저장되는 공간  
 
-### Heapd의 메모리 구조(효율적인 GC의 관리를 위한)
+### 4. Heapd의 메모리 구조(효율적인 GC의 관리를 위한)
 다른 메모리 영역들과 드리게 Heap의 영역은 조금 다르다. Heap은 동적으로 생성되는 객체를 다루기 때문에 생성되는 객체의 크기를 가늠하기가 어렵다. 따라서 지속적인 관리가 필요한데 이를 GC가 자동으로 관리해준다. 이렇게 일종의 메모리 관리 프로그램인 GC를 효율적으로 관리하기 위해 Heap영역을 크게는 2가지 카테고리와 세세하게는 5가지 영역으로 나누었다.Young Generation, Old Generation 그리고 Eden과 두개의 Survior(1,2), Old, Permenent(생성된 객체의 주소가 저장되는 영역이다). 나눈 이유에 대해선 GC의 작동 방식을 이해하면 납득 될 것이다.   
 
 ![image](https://user-images.githubusercontent.com/78134917/154841693-d48f5efa-75e1-4d8c-aee9-55167f6f969e.png)  
@@ -146,5 +146,10 @@ CPU리소스 및 메모리 파편화의 단점을 해결하기 위해 만들어�
 ![image](https://user-images.githubusercontent.com/78134917/154844727-42c431b8-9ef0-4e5f-a8b6-36387d4ac20f.png)  
 
 
+### 5. Java Collection Framwork(Hash vs Tree)
 
+#### Hash의 탄생 배경
+ArrayList의 update, insert의 단점을 극복하기 위해서 Linked List가 발전했는데 Linked List는 ArrayList의 장점을 살리지 못함. 이러한 이유로 Hash라는 자료구조가 탄생함.  
+내부적으로는 배열로 되어있어 조회시의 장점도 가지고 있지만 insert, update, delete 시 기존 데이터를 밀고 당기기 위해 복사하는 과정을 없애고 데이터와 연관된 고유 숫자를 생성하고 그 숫자를 인덱스 번호로 사용한다. 해당 인덱스를 데이터의 고유번호로 지정하여 데이터 추가/삭제시 이동이 없게 만들었다.  
 
+Hash 내부적으로 사용하는 테이블을 HashTable이라고 부른다. HashTable의 인덱스 값은 HashMethod( = 임의의 길이를 갖는 임의의 데이터를 고정된 길이의 데이터(해시 값)로 매핑하는 함수를 말한다.)를 통해 만들어낸 데이터의 고유숫자인 hash code(= hashsum,체크섬)를 사용한다. 하지만 계산된 숫자이기에 HashMethod를 결과값인 HashCode의 경우는 중복이 발생 가능하다. 이를 **충돌** 이라고 부른다.
