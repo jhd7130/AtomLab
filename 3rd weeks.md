@@ -100,5 +100,5 @@ public class GenericTest{
 
 자바는 null에 대해 신경을 덜 쓰기 위해 함수형프로그램에서 착안하여 Optional이라는 클래스가 만들었다. 이 클래스는 우리가 기본타입(primitive type)을 객체로 만들때 사용하는 Integer 클래스와 같은 Wrapper 클래스이다. null이 발생할 것 같은 객체를 이 Optional클래스로 감싸서 사용하게되면 NPE의 발생을 최소화할 수 있다.  
 
-이 optional은 serializable이 구현되어 있지 않음으로 직렬화가 불가능하다. 이 말은 optional 클래스로 wrapping한 객체를 사용하는 클래스는 직렬화가 불가능하다는 말이다.
+이 optional은 serializable이 구현되어 있지 않음으로 직렬화가 불가능하다. 이 말은 optional 클래스로 wrapping한 객체를 사용하는 클래스는 직렬화가 불가능하다는 말이다.(이부분은 조금 더 알아볼 필요가 있다.)
 
