@@ -77,4 +77,18 @@ public class Member {
 # RestController vs Controller
 기존의 controller 자체는 view를 반환하기 위해 만들어졌기 때문에 Data 자체를 반환하려면 @ResponseBody를 추가해주는 번거로움이 존재했다.  
 이러한 번거로움을 해결하고 반환객체의 자유도를 주기 위해 @RestController가 만들어졌고 이 컨트롤러는 자체로 @ResponseBody를 가지고 있으며 기존의 controller의 viewresolver 대신
-Spring은 클라이언트의 HTTP Accept 헤더와 서버의 컨트롤러 반환 타입 정보 둘을 조합해 적합한 HttpMessageConverter를 선택하여 이를 처리한다.
+Spring은 클라이언트의 HTTP Accept 헤더와 서버의 컨트롤러 반환 타입 정보 둘을 조합해 적합한 HttpMessageConverter를 선택하여 이를 처리한다.  
+  
+# @Component vs @Bean 차이(feat.@Configuration)
+**@Configuration 내부에 @Conponent가 존재한다. 따라서 둘은 다르지 않다.**
+
+### @Component  
+ 
+ - 개발자가 직접 작성한 클래스를 bean 등록하고자 할 경우 사용  
+   
+  
+ 
+### @Configuration + @Bean  
+
+ - 외부라이브러 또는 내장 클래스를 bean으로 등록하고자 할 경우 사용. 
+ - 1개 이상의 @Bean을 제공하는 클래스의 경우 반드시 @Configuraton을 명시
