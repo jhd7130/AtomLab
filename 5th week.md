@@ -80,15 +80,17 @@ public class Member {
 Spring은 클라이언트의 HTTP Accept 헤더와 서버의 컨트롤러 반환 타입 정보 둘을 조합해 적합한 HttpMessageConverter를 선택하여 이를 처리한다.  
   
 # @Component vs @Bean 차이(feat.@Configuration)
-**@Configuration 내부에 @Conponent가 존재한다. 따라서 둘은 다르지 않다.**
+### @Configuration 과 @Component가 같다?
+@Component, @Configuration, @Controller, @RestController, @Service, @Repository 어노테이션은 서버 실행시 Component-Scan을 통해 Bean이 등록된다.
+위 목록에서 @Conponent를 제외한 나머지 Annotaion들은 모두 Component를 가지고 있다. 따라서 둘은 다르지 않다.
 
-### @Component  
- 
+
+### 그래서 언제 쓰는데!?
+**1. @Component**   
  - 개발자가 직접 작성한 클래스를 bean 등록하고자 할 경우 사용  
    
   
  
-### @Configuration + @Bean  
-
+**2. @Configuration + @Bean**
  - 외부라이브러 또는 내장 클래스를 bean으로 등록하고자 할 경우 사용. 
  - 1개 이상의 @Bean을 제공하는 클래스의 경우 반드시 @Configuraton을 명시
