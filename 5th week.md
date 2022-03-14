@@ -97,7 +97,6 @@ Spring은 클라이언트의 HTTP Accept 헤더와 서버의 컨트롤러 반환
 
 # Interceptor
 filter(Tomcat Server)는 interceptor(Spring Container)보다 더 바깥쪽에 존재한다. 그래서 filter에서 interceptor를 컨트롤할 수 있다. 먼저 Interceptor를 알아보자.  
-
-인터셉터는 따로 추가를 해줘야한다??  
-
-
+인터셉터는 뭐다? 
+인터셉터는 따로 추가를 해줘야한다??(CONFIGURATION?으로 인터셉터 명시 필요?)  
+인터셉터는 
