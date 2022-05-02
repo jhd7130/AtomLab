@@ -56,4 +56,9 @@ Server : 컴퓨터 장치 또는 컴퓨터 프로그램을 일컷는다.
 
 개념 : 
 
-수많은 하드웨어를 하나의 컴퓨팅자원으로 생각하고 해당 자원을 나눠서 사용하는 것
+수많은 하드웨어를 하나의 컴퓨팅자원으로 생각하고 해당 자원을 나눠서 사용하는 것. 
+
+
+## #3. gradle compile과 implementation 차이
+개발을 하던 중 한가지 궁금증이 생겼다. gradle의 dependency 설정시 compile과 implementation의 차이가 뭘까  
+compile의 경우 사용자가 원하는 모듈만 가져오는 것이 아니라 관련된 라이브러리도 모두 가져온다. 반면 Implementation의 경우 원하는 모듈만 가져올 수 있다. 
