@@ -62,3 +62,11 @@ Server : 컴퓨터 장치 또는 컴퓨터 프로그램을 일컷는다.
 ## #3. gradle compile과 implementation 차이
 개발을 하던 중 한가지 궁금증이 생겼다. gradle의 dependency 설정시 compile과 implementation의 차이가 뭘까  
 compile의 경우 사용자가 원하는 모듈만 가져오는 것이 아니라 관련된 라이브러리도 모두 가져온다. 반면 Implementation의 경우 원하는 모듈만 가져올 수 있다. 
+
+
+## #4. @Override
+
+Ovrride의 annotation의 경우 명시적인 목적으로 사용한다. 
+모든 annotation이 명시적 목적으로 사용되는 건 아니다. annotation에 맞는 기능도 추가하는 것이 가능하다. 
+
+@Override의 경우 ‘이거 내가 부모꺼 덮어썼어 이거 가져다 쓰면 돼!’와 이거 내가(자바) 문법 체크 해줄게!! 가 된다.
