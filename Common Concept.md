@@ -70,3 +70,6 @@ Ovrride의 annotation의 경우 명시적인 목적으로 사용한다.
 모든 annotation이 명시적 목적으로 사용되는 건 아니다. annotation에 맞는 기능도 추가하는 것이 가능하다. 
 
 @Override의 경우 ‘이거 내가 부모꺼 덮어썼어 이거 가져다 쓰면 돼!’와 이거 내가(자바) 문법 체크 해줄게!! 가 된다.
+
+## #5. client side vs server side. 
+
