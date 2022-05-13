@@ -72,7 +72,8 @@ Ovrride의 annotation의 경우 명시적인 목적으로 사용한다.
 @Override의 경우 ‘이거 내가 부모꺼 덮어썼어 이거 가져다 쓰면 돼!’와 이거 내가(자바) 문법 체크 해줄게!! 가 된다.
 
 ## #5. client side vs server side. 
-
+서버사이드렌더링 : 
+클라이언트사이드 렌더링 : 
 
 ## #6. Itorator
 Itorable 인터페이스를 구현하는 모든 Collection 프레임워크에서 사용 가능한 객체이다. 세가지 메서드가 존재한다.  
