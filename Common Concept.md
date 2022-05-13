@@ -73,3 +73,8 @@ Ovrride의 annotation의 경우 명시적인 목적으로 사용한다.
 
 ## #5. client side vs server side. 
 
+
+## #6. Itorator
+Itorable 인터페이스를 구현하는 모든 Collection 프레임워크에서 사용 가능한 객체이다. 세가지 메서드가 존재한다.  
+hasNext() : 다음 값이 있는지 체크하는 메서드 , next() :  다음요소를 가져오는 메서드, remove() : 요소를 지우는 메서드   
+객체를 생성해야하는 작업이 필요함으로 단순 반복문 보다 느리다.  
