@@ -21,7 +21,7 @@ Session의 경우 요청이 들어오면 클라이언트 마다 저장공간을 
 Session-clustering에는 두가지 방식이 존재한다. Session 자장소로 사용할 DB를 만들거나, in-memory DB를 Session 저장소로 만드는 것이다. 여기서 중요한 것은 요청마다 SessionId가 부여된다. clustering방식의 Session 관리는 클라이언트의 SessionId들이 있는 Session저장소들을 관리하는 거다. 클라이언트A가 어떠한 요청을하면 Session이 생기고 SessionId가부여된다. 그럼 그 SessionId를 식별자로 Session이 Session저장소에 저장된다. 클라이언트 B의 요청은 또다른 SessionId로 저장소에 저장된다. 
 
 ## #2. Redis란?
-in-memory방식의 DataBase를 제공해주는 NoSQL이다. 장점은 disk를 사용하는 DBMS보다 빠르다. 서버에서 서버로 이동하는 IO가 없으니 당연히 빠르다.(서버에서 서버 이동도 그렇지만 컴퓨터에서 디바이스로 접근하는 것도 IO가 발생한다.) 이건 장점이긴하지만 Redis의 장점 중 하나 일뿐이다. 그리고 인메모리 디비는 다 빠르다. Redis가 다른 in-memory보다 좋은 점은 다양한 자료구조를 지원한다는 것이다. 
+in-memory방식의 DataBase를 제공해주는 NoSQL 또는 캐시 이다. 장점은 disk를 사용하는 DBMS보다 빠르다. 서버에서 서버로 이동하는 IO가 없으니 당연히 빠르다.(서버에서 서버 이동도 그렇지만 컴퓨터에서 디바이스로 접근하는 것도 IO가 발생한다.) 이건 장점이긴하지만 Redis의 장점 중 하나 일뿐이다. 그리고 인메모리 디비는 다 빠르다. Redis가 다른 in-memory보다 좋은 점은 다양한 자료구조를 지원한다는 것이다. 
 <img width="1074" alt="스크린샷 2022-05-26 오후 4 30 24" src="https://user-images.githubusercontent.com/78134917/170440117-cbfa4e7a-56da-4119-a33a-be94b7558ed6.png">  
 https://devlog-wjdrbs96.tistory.com/374
 
