@@ -67,8 +67,8 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 @Configuration
-@EnableRedisRepositories
-@EnableRedisHttpSession(maxInactiveIntervalInSeconds = 60) /* 세션 만료 시간 : 60초 */
+// @EnableRedisHttpSession(maxInactiveIntervalInSeconds = 60)   
+/* 세션 만료 시간 : 60초 사실 이 어노테이션과 옵션은 yml에 spring.session의 storage를 redis로 등록한 경우라면 작성할 필요가 없고 세션 만료 시간도 sevelet session timeout을 yml에 등록하면 상관없다. */
 public class RedisConfiguration {
 
     @Value( "${spring.redis.host}")
