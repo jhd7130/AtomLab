@@ -10,7 +10,9 @@
 HOST에 대한 식별자. 여기서 HOST는 인터넷에 연결되어 있는 컴퓨터 기기를 이야기한다. 이 IP주소는 기기 한대당 n개를 가질 수 있다.   
   
 **Port번호 :  Process에 대한 식별자**   
-Process에 대한 식별자를 이야기한다. 소프트웨어 개발자에게는 process 식별자, 네트워크 3,4계층 담당자에게는 service 식별자, 하드웨어 담당자들에게는 선을 꽂는 구멍에 대한 식별자 .  
+Process에 대한 식별자를 이야기한다. 소프트웨어 개발자에게는 process 식별자, 네트워크 3,4계층 담당자에게는 service 식별자, 하드웨어 담당자들에게는 선을 꽂는 구멍에 대한 식별자 .   
+
+개발자 입장에서의 port 번호는 위에서 이야기했다 싶이 process에 대한 식별자로 생각해야한다. 하지만 이 포트번호는 네트워크에서 많이 사용되는데 어떻게 사용될까? 우리가 흔히 네트워크 통신을 할때 kernel mode (TCP/IP)와 user mode를 연결해주기 위해 socket을 이용한다. 각 process마다 개별적인 socket이 생기고 해당 process의 port번호는 소캣에 바인딩된다.
 
 ## #2. Host, Switch, Network
 ### Host와 Switch
