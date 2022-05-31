@@ -41,3 +41,17 @@ internet은 Router와 DNS의 거대한 집합체이고
 IP주소는 8bit씩 끊어서 표시 000.000.000.000 로 표현  
 IPv4 = 네트워크 id + 호스트 id 이다.  
 여기서 네트워크 id를 부르는 명칭을 '넷 마스크'라고 부른다. 그러면 만약 내 ip의 서브넷 마스크가 24비트의 길이를 가진다면 000.000.000.000/24 라고 표현할 수 있다. 이를 CIDR이라는 용어로 표현한다.
+
+
+## #4. Switch와 네트워크  
+네트워크(인터넷)을 도로라고 생각해보자. 네트워크는 라우터의 집합이라고 이야기했다. 우리는 도로(네트워크)를 지날때 교차로를 만난다. 이 교차로를 네트워크에서는 switch라고 부른다. 네트워크는 라우터의 집합이라고 했고 위에서 라우터는 switch의 한 종류로서 L3Switch라고 부를 수 있다. 그렇다면 교차로는 Router다. 우리가 도로를 타는 이유는 목적지까지 향하기 위해서다. 도로에 이정표가 없다면 우리는 목적지까지 효율적으로 찾아갈 수 없다. 이러한 이정표를 네트워크에서는 Routing Table이라고한다. 이제 다시 정리를 해보자.  
+  
+우리는 도로(네트워크)를 통해 목적지(목적Host)까지 가려고 한다. 도로를 달리며 교차로(Router,L3Switch)를 만나게되는데 이정표(Routing table)을 보고 경로 선택(Swtiching)을 한다. 
+
+## #5. 네트워크 데이터의 단위
+Socket(Application, user mode, process)단위에서 Stream 데이터 단위를 이용해서 데이터를 전송한다. 이 Stream이라는 데이터 단위는 전송할 File I/O에 사용될 길이가 긴 데이터다.  
+하지만 이 긴 데이터를 네트워크 영역에서 한번에 보내는 것은 불가능하다. Socket레벨에서 전송한 긴 Stream 데이터를 TCP영역으로 보낼때 데이터를 잘게 분해한다. 이를 우리는 Segment화 시킨다고하여 Segmentation이라고 부른다. 이 Stream을 어떤 기준으로 Segmentation해서 Segement로 만들까? 정해진 기준이 있다. MSS(Maximum Segment Size)를 기준으로 Segementation한다. 이제 이렇게 분해된 Segement를 IP 영역으로 보낼때 포장한다고 해서 Packet이라는 단위를 사용한다. 이 packet도 한계가 있고 그 한계를 MTU(Maximum Transfer Unit)라고 부른다. 이 MTU의 최대 크기는 1500byte이고 segment 하나는 MTU보다 작다. 그리고 이렇게 Segement들의 포장인 Packet을 네트워크로 보내기 위해 Frame으로 변환 시킨다.
+
+
+
+
