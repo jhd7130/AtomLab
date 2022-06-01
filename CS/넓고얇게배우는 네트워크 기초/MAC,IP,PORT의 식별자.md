@@ -2,7 +2,7 @@
 <img width="635" alt="image" src="https://user-images.githubusercontent.com/78134917/170925000-6ff9b320-c2d5-49c7-a52b-9f20c842b589.png">
 
 
-**MAC주소 : NIC의 식별자  **
+**MAC주소 : NIC의 식별자**
 인터넷을 연결할 수 있는 NIC(network interface card)의 식별을 담당한다. 여기서 NIC를 LAN카드(유선/무선)를 의미한다.   
 하드웨어 적인 부분을 이야기한다. 변경이 가능하다. 하드웨어 기기에 NIC가 두개이면 MAC주소도 두개이다.
   
