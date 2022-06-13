@@ -94,4 +94,8 @@ hasNext() : 다음 값이 있는지 체크하는 메서드 , next() :  다음요
 - 마셜링이 직렬화와 다른 점은 원격 오브젝트(remote object)를 특별하게 다룬다는 점이다.
 **정리**  
 오브젝트를 "직렬화한다"는 것은 오브젝트의 상태를 오브젝트의 사본으로 다시 변환할 수 있는 바이트 스트림으로 변환하는 것을 의미한다.  
-참조 : https://seokrae.gitbook.io/sr/java-1/undefined/marshalling_n_serialization
+참조 : https://seokrae.gitbook.io/sr/java-1/undefined/marshalling_n_serialization. 
+
+
+## #8. Java Reflection
+자바의 API 중 하나이다. 이 api를 사용하면 클래스, 클래스의 메서드 정보 등을 확인하고 가져와서 사용할 수 있다.  
