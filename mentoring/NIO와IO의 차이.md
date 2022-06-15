@@ -1,15 +1,13 @@
 # NIO와 IO
 우선 먼저 저희 할머니도 알아들을 수 있을 정도로 설명할 수 있는게 제 목표입니다.  
   
-우선 문자의 측면에서 nio와io의 차이를 보면 눈에 보이지는 않지만 blocking이라는 단어가 포함되어 있다. 그럼 다시 문자에 대한 정의를 내려보면 
-Non Blocking IO vs Blocking IO의 차이라고 생각할 수 있다. 이렇게 보면 두 IO의 차이가 뭔지 러프하게 이해할 수 있다. Blocking의 경우 막는다라는 의미를 가지고 있다. 그럼 뭘 막고 뭘 막지 않는 걸까?
+nio와io의 차이를 보면 눈에 보이지는 않지만 blocking이라는 단어가 포함되어 있다. Blocking의 경우 막는다라는 의미를 가지고 있다. 그럼 다시 문자에 대한 정의를 내려보면 Non Blocking IO vs Blocking IO의 차이라고 생각할 수 있다. 이렇게보면 두 IO의 차이가 뭔지 러프하게 이해할 수 있다. 그럼 뭘 막고 뭘 막지 않는 걸까?
   
-컴퓨터 과학의 개념에서 보면 병렬성, 동시성에서 가장 중요한 것은 동기화이다. 이 동기화라는 단어를 Blocking과 연관지어 생각한다면 두 개념의 차이를 이해하는데 조금은 더 수월할 것 같다.  
+컴퓨터 과학의 개념에서 보면 병렬성, 동시성에서 가장 중요한 것은 동기화이다. 동기화를 Blocking과 연관지어 생각한다면 두 개념의 차이를 이해하는데 조금은 더 수월할 것 같다.  
 
 ## #1. 동기*비동기, Blocking*Non-Blocking
 
-
-동기 == Blocking 이다.(다름점이 한가지 있다. 대기 큐에 머무르면 blocking이다.) 하지만 비동기의 개념과 non-blocking의 개념은 조금 다르다. 차이는 아래와 같다.  
+동기 == Blocking 이다.( 사실 다름점이 한가지 있다. 대기 큐에 머무르면 blocking이고 아니면 동기이다.) 하지만 비동기의 개념과 non-blocking의 개념은 조금 다르다. 차이는 아래와 같다.  
 
 - system call이 반환될 때 실행된 결과와 함께 반환될 경우 non-blocking
 - system call이 반횐될 때 실행된 결과와 함께 반환되지 않는 경우 asynchronous
@@ -22,4 +20,6 @@ Non Blocking IO vs Blocking IO의 차이라고 생각할 수 있다. 이렇게 �
 [출처 : https://www.slipp.net/questions/367]
 
 ## #2. Blocking i/o의 단점을 개선한 Non-Blocking IO  
-blocking io는 비동기 지원 x. blocking API인 io 패키지의 InputStream과 같은 객체 사용시 반환값이 오기 전까지 프로그램은 blocked(작동 중지)한다. 그래서 하나의 서버에서 blocking 방식을 사용한다면 여러 클라이언트가 서버의 서비스를 이용할 때 각 클라이언트마다 Thread 할당을 하는 멀티 쓰레딩 방식을 사용해야하는데 but Thread 또한 한정적인 자원이므로 매 작업마다 새로운 쓰레드를 만들어서 사용한다면 문제가 발생한다.  
+blocking API를 사용한 IO는 비동기를 지원하지 않는다. blocking API인 io 패키지의 InputStream과 같은 객체를 사용할때 반환값이 오기 전까지 프로그램 또는 Thread는 blocked(작동 중지)된다. 그래서 하나의 서버에서 blocking 방식을 사용한다면 여러 클라이언트가 서버의 서비스를 이용할 때 각 클라이언트마다 Thread 할당을 하는 멀티 쓰레딩 방식을 사용해야하는데 but Thread 또한 한정적인 자원이므로 매 작업마다 새로운 쓰레드를 만들어서 사용한다면 문제가 발생한다.  
+
+이러한 문제점을 해결할 수 있도록 나온게 NIO이다. Non-Blocking IO의 경우에는
