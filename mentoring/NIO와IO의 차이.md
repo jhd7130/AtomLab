@@ -20,6 +20,6 @@ nio와io의 차이를 보면 눈에 보이지는 않지만 blocking이라는 단
 [출처 : https://www.slipp.net/questions/367]
 
 ## #2. Blocking i/o의 단점을 개선한 Non-Blocking IO  
-blocking API를 사용한 IO는 비동기를 지원하지 않는다. blocking API인 io 패키지의 InputStream과 같은 객체를 사용할때 반환값이 오기 전까지 프로그램 또는 Thread는 blocked(작동 중지)된다. 그래서 하나의 서버에서 blocking 방식을 사용한다면 여러 클라이언트가 서버의 서비스를 이용할 때 각 클라이언트마다 Thread 할당을 하는 멀티 쓰레딩 방식을 사용해야하는데 but Thread 또한 한정적인 자원이므로 매 작업마다 새로운 쓰레드를 만들어서 사용한다면 문제가 발생한다.  
+blocking API를 사용한 IO는 비동기를 지원하지 않는다. blocking API인 io 패키지의 InputStream과 같은 객체의 메서드를 사용할때 반환값이 돌아오기 전까지 프로그램 또는 Thread는 blocked(작동 중지) 처리 된다. 그래서 하나의 서버에서 blocking 방식을 사용한다면 여러 클라이언트가 서버의 서비스를 이용할 때 각 클라이언트마다 Thread 할당을 하는 멀티 쓰레딩 방식을 사용해야하는데 but Thread 또한 한정적인 자원이므로 매 작업마다 새로운 쓰레드를 만들어서 사용한다면 문제가 발생한다.  
 
 이러한 문제점을 해결할 수 있도록 나온게 NIO이다. Non-Blocking IO의 경우에는
