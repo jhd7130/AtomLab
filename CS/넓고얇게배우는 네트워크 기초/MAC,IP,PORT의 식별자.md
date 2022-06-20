@@ -53,5 +53,9 @@ Socket(Application, user mode, process)단위에서 Stream 데이터 단위를 �
 하지만 이 긴 데이터를 네트워크 영역에서 한번에 보내는 것은 불가능하다. Socket레벨에서 전송한 긴 Stream 데이터를 TCP영역으로 보낼때 데이터를 잘게 분해한다. 이를 우리는 Segment화 시킨다고하여 Segmentation이라고 부른다. 이 Stream을 어떤 기준으로 Segmentation해서 Segement로 만들까? 정해진 기준이 있다. MSS(Maximum Segment Size)를 기준으로 Segementation한다. 이제 이렇게 분해된 Segement를 IP 영역으로 보낼때 포장한다고 해서 Packet이라는 단위를 사용한다. 이 packet도 한계가 있고 그 한계를 MTU(Maximum Transfer Unit)라고 부른다. 이 MTU의 최대 크기는 1500byte이고 segment 하나는 MTU보다 작다. 그리고 이렇게 Segement들의 포장인 Packet을 네트워크로 보내기 위해 Frame으로 변환 시킨다.
 
 
-
+## #6. 인터페이스 선택의 핵심원리  
+Chrome에서 인터넷을 통해 데이터를 보내보자. 데이터는 각각의 레이어에 맞는 데이터로 변환되어 넘어갈 것이고 결국에는 출구(인터페이스: NIC)를 통해 인터넷의 바다로 나아가게 된다.  
+만약 이 출구(인터페이스)가 두개라면 어떻게 될까? 컴퓨터는 누굴 선택할까? 답은 메트릭 값에 있다. 이 메트릭 값은 비용이라고 보면되는데 이 비용이 낮은 것을 기준으로 출구를 찾아 나간다.  
+  
+  
 
