@@ -14,3 +14,15 @@
   자 이제 그림을 보면 어느정도 알 수 있다. 가장 중요한 부분은 수신하는 곳에서 생길 수 있는 window size 부족으로 인해 웹 서버에서 추가적인 packet을 발송하지 않게되는 장애에 대한 이야기이다.  
   그림에서와 같이 어느 정도 segment가 쌓이면 클라이언트 서버 TCP 레이어에서는 ACK#3을 window size와 함께 보낸다. 이 사이즈를 mss와 체크 후 충분한 여유가 있을 때 추가적인 정보를 보낼 수 있다. 하지만 이 size가 부족하다면 송신 서버는 더 이상 segment를 보내지 않고 기다린다.  
 이러한 이유로 클라이언트가 속도 측면의 클레임을 낼때는 수신 받는 서버의 TCP Buffer에 쌓이는 Segment들을 Process가 빠르게 읽어서 Read 후 Recieve 하는지 체크해야 한다. 결국 송신 받아 TCP Buffer에 쌓이는 속도보다 Process가 TCP Buffer를 읽어 자신의 Buffer에 쌓는 속도가 더 빨라야 한다.  
+  
+## #2. TCP 헤더  
+
+![IMG_1E9593489D86-1](https://user-images.githubusercontent.com/78134917/175823467-718236d2-4c92-4458-9642-240b43c5b028.jpeg)  
+  
+### 3-way HandShake. 
+
+![IMG_881020FCBC8D-1](https://user-images.githubusercontent.com/78134917/175823788-22f6cf19-f657-41cc-b9ac-5945871b95e5.jpeg)  
+
+
+기본적으로 Sequence 번호를 교환하는 것. 하지만 추가적인 정보도 같이 간다. MSS와 정책을 교환한다. 정책은 혼잡제어에 대한 정책이다. Selective Acknowledgement를 혼잡제어 정책으로 많이 씀.  
+보안상 없어서 속이려면 얼마든지 속일 수 있다. 
