@@ -1,0 +1,24 @@
+
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+
+    steps:
+      - name: Do enviroment
+        env : 
+            COMMIT_ID: ${{ github.sha }}
+        run: echo "Commit id is $COMMIT_ID"
