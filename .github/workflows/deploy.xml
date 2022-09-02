@@ -4,7 +4,7 @@ name: React build apple
 on: 
   push:            
     branches:
-      - master
+      - main
 ######### master branch에 push 되었을때만 실행#########
 
 jobs:
