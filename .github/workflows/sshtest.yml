@@ -1,0 +1,21 @@
+name: SSHTest
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy
+      uses: appleboy/ssh-action@master
+      with: 
+        host: ${{ secrets.HOST_IP }}
+        username: ${{ secrets.HOST_ID }}
+        password: ${{ secrets.HOST_PASSWORD }}
+        port: ${{ secrets.HOST_PORT }}
+        script: |
+          echo "테스트 출력"
