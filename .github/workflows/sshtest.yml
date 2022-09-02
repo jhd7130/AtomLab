@@ -10,12 +10,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Deploy
-      uses: appleboy/ssh-action@master
-      with: 
-        host: ${{ secrets.HOST_IP }}
-        username: ${{ secrets.HOST_ID }}
-        password: ${{ secrets.HOST_PASSWORD }}
-        port: ${{ secrets.HOST_PORT }}
-        script: |
-          echo "테스트 출력"
+    - name: writeSSHCommand
+      run: ssh ${{ secrets.HOST_ID }}@${{ secrets.HOST_IP }} -p ${{ secrets.HOST_PORT }}
+    - name: putPassword
+      run: ${{ secrets.HOST_PASSWORD }}
+    - name: TestCommand
+      run: echo "test"
