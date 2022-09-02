@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: writeSSHCommand
-      run: ssh ${{ secrets.HOST_ID }}@${{ secrets.HOST_IP }} -p ${{ secrets.HOST_PORT }}
+      run: ssh -T ${{ secrets.HOST_ID }}@${{ secrets.HOST_IP }} -p ${{ secrets.HOST_PORT }}
     - name: putPassword
       run: ${{ secrets.HOST_PASSWORD }}
     - name: TestCommand
