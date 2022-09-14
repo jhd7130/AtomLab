@@ -13,5 +13,6 @@ jobs:
         username: ${{ secrets.HOST_ID }}
         key: ${{ secrets.KEY }}
         port: ${{ secrets.HOST_PORT }}
+        script_stop: true
         script: |
               ls -al
