@@ -14,6 +14,8 @@ jobs:
         distribution: 'temurin'
     - name: check file
       run: ls -al
+    - name: check time
+      run: date +%Y-%m-%d 
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@dce9d565de8d876c11d93fa4fe677c0285a66d78
       with:
